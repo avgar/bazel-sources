@@ -1,0 +1,16 @@
+load("//wix_sources/src/main:wix_sources.bzl", "source_files")
+
+scala_library(
+    name = "source_files_lib",
+    testonly = 1,
+    srcs = ["NonDependantClass.scala"],
+)
+
+source_files(
+    name = "direct_sources",
+    testonly = 1,
+    artifact_id = "artifact_id",
+    group_id = "group_id",
+    main_artifact_name = "source_files_lib",
+    visibility = ["//wix_sources/src/test/com/wixpress/build/sources:__pkg__"],
+)

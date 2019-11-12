@@ -1,0 +1,12 @@
+filegroup(
+    name = "wix_source_rule",
+    srcs = [
+        "wix_sources.bzl",
+        "wix_sources_aspect.bzl",
+    ],
+    visibility = [
+        "//wix-config/src:__subpackages__",
+        "//wix-kube/src:__subpackages__",
+        "//wix_sources/src:__subpackages__",
+    ],
+)

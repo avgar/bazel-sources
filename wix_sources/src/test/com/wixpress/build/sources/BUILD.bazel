@@ -1,0 +1,19 @@
+scala_specs2_junit_test(
+    name = "test",
+    size = "small",
+    testonly = 1,
+    srcs = glob(["*.scala"]),
+    data = [
+        "//wix_sources/src/test/com/wixpress/build/sources/setup/dep_sources",
+        "//wix_sources/src/test/com/wixpress/build/sources/setup/direct_sources",
+        "//wix_sources/src/test/com/wixpress/build/sources/setup/multi_line_result",
+        "//wix_sources/src/test/com/wixpress/build/sources/setup/no_sources",
+        "//wix_sources/src/test/com/wixpress/build/sources/setup/resources_src",
+        "//wix_sources/src/test/com/wixpress/build/sources/setup/runtime_dep",
+        "//wix_sources/src/test/com/wixpress/build/sources/setup/third_party_dep",
+    ],
+    prefixes = ["Test"],
+    suffixes = ["Test"],
+    tags = ["UT"],
+    deps = ["@com_wixpress_hoopoe_hoopoe_json_mapper"],
+)

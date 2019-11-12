@@ -1,0 +1,23 @@
+load("//wix_sources/src/main:wix_sources.bzl", "source_files")
+
+scala_library(
+    name = "src_files_lib",
+    testonly = 1,
+    srcs = ["RSource.scala"],
+)
+
+scala_library(
+    name = "runtime_dep_files_lib",
+    testonly = 1,
+    srcs = [],
+    runtime_deps = [":src_files_lib"],
+)
+
+source_files(
+    name = "runtime_dep",
+    testonly = 1,
+    artifact_id = "artifact_id",
+    group_id = "group_id",
+    main_artifact_name = "runtime_dep_files_lib",
+    visibility = ["//wix_sources/src/test/com/wixpress/build/sources:__pkg__"],
+)

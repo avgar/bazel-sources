@@ -1,0 +1,25 @@
+load("//wix_sources/src/main:wix_sources.bzl", "source_files")
+
+filegroup(
+    name = "transitive_config_files_filegroup",
+    testonly = 1,
+    srcs = [
+        "config.erb",
+    ],
+)
+
+scala_library(
+    name = "transitive_config_files_artifact",
+    testonly = 1,
+    resources = [":transitive_config_files_filegroup"],
+    visibility = ["//wix-config/src/test/com/wixpress/build/sources:__pkg__"],
+)
+
+source_files(
+    name = "resources_src",
+    testonly = 1,
+    artifact_id = "artifact_id",
+    group_id = "group_id",
+    main_artifact_name = ":transitive_config_files_artifact",
+    visibility = ["//wix_sources/src/test/com/wixpress/build/sources:__pkg__"],
+)

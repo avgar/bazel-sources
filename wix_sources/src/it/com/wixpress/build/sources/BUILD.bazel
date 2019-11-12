@@ -1,0 +1,31 @@
+load("@build_bazel_integration_testing//tools:bazel_java_integration_test.bzl", "bazel_java_integration_test")
+load("@io_bazel_rules_scala//specs2:specs2_junit.bzl", "specs2_junit_dependencies")
+
+scala_library(
+    name = "source_lib",
+    testonly = 1,
+    srcs = glob(["*.scala"]),
+    data = ["//wix_sources/src/main:wix_source_rule"],
+    deps = [
+        "@junit_junit",
+        "@build_bazel_integration_testing//java/build/bazel/tests/integration:workspace_driver",
+        "@com_github_pathikrit_better_files_2_12//:com_github_pathikrit_better_files_2_12",
+        "//e2e/it/common:bazel_e2e_common",
+        "//e2e/it/common:workspace_matchers",
+    ] + specs2_junit_dependencies(),
+)
+
+bazel_java_integration_test(
+    name = "sources",
+    external_deps = [
+        "@io_bazel_rules_scala_test",
+        "@bazel_toolchains_test",
+    ],
+    tags = [
+        "IT",
+        "block-network",
+    ],
+    test_class = "com.wixpress.build.sources.WixSourceIT",
+    versions = ["0.23.2"],
+    runtime_deps = [":source_lib"],
+)

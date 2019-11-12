@@ -1,0 +1,17 @@
+load("//wix_sources/src/main:wix_sources.bzl", "source_files")
+
+scala_library(
+    name = "dep",
+    testonly = 1,
+    srcs = [],
+    runtime_deps = ["@junit_junit"],
+)
+
+source_files(
+    name = "third_party_dep",
+    testonly = 1,
+    artifact_id = "artifact_id",
+    group_id = "group_id",
+    main_artifact_name = "dep",
+    visibility = ["//wix_sources/src/test/com/wixpress/build/sources:__pkg__"],
+)
